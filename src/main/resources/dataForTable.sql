@@ -10,7 +10,7 @@ VALUES (1,
 INSERT INTO 'user_account' ('id', 'username' , 'password', 'firstname', 'lastname', 'role', 'status')
 VALUES (1,
   'Nik',
-  'Nik!',
+  'Nik1!',
   'Nik',
   'Nik',
   'USER' ,
