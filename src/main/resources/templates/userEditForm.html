@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>User edit form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> User account edit form </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 form-group">
+            <form th:action="@{/user/{id}/edit(id=${userAccount.id})}"
+                  th:object="${userAccount}" method="POST" class="form">
+                <table border="0">
+
+                    <input type="hidden" th:field="*{id}" value="${id}"/>
+                    <input type="hidden" th:field="*{createdAt}" value="${createdAt}"/>
+
+                    <div th:if="${userAccount}">
+                        <table class="table">
+                            <div class="col-md-6 form-group">
+                                <tr>
+                                    <td>Username</td>
+                                    <td>:</td>
+                                    <td><input class="form-control" type="text" th:field="*{username}"/></td>
+                                    <td class="alert alert-warning" th:if="${#fields.hasErrors('username')}"
+                                        th:errors="*{username}">Username Error
+                                </tr>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <tr>
+                                    <td>Firstname</td>
+                                    <td>:</td>
+                                    <td><input class="form-control" type="text" th:field="*{firstName}"/></td>
+                                    <td class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}"
+                                        th:errors="*{firstName}">Firstname Error
+                                </tr>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <td>Lastname</td>
+                                <td>:</td>
+                                <td><input class="form-control" type="text" th:field="*{lastName}"/></td>
+                                <td class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}"
+                                    th:errors="*{lastName}">Lastname Error
+                            </div>
+                        </table>
+
+                        <select class="btn btn-primary dropdown-toggle" name="status" th:field="*{status}">
+                            <option th:each="status : ${T(com.yanch.javaDevHomeTask.model.Status).values()}"
+                                    th:value="${status}" th:text="${status}"></option>
+                        </select>
+
+                        <select class="btn btn-primary dropdown-toggle" name="status" th:field="*{role}">
+                            <option th:each="role : ${T(com.yanch.javaDevHomeTask.model.Role).values()}"
+                                    th:value="${role}" th:text="${role}"></option>
+                        </select>
+
+                        <input class="btn btn-success" type="submit" th:value="${'Update'} "/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div sec:authorize="hasAuthority('userAccount:write')">
+                            <td><a class="btn btn-success" href="#" th:href="@{/user/new}"> Create user </a></td>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col-md-8">
+                        <a class="btn btn-primary " th:href="@{/user}">Back to Contact List</a>
+                    </div>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

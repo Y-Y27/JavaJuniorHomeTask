@@ -1,0 +1,94 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>User accounts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> User accounts </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
+                            Id</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+                            Firstname</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+                            Lastname</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=role&sortDir=' + ${reverseSortDir}}">
+                            Role</a>
+                    </th>
+                    <th> Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="userAccount : ${userAccounts}">
+                    <td th:text="${userAccount.id}"></td>
+                    <td><a th:href="@{/user/{id}(id=${userAccount.id})}" th:utext="${userAccount.firstName}">...</a>
+                    </td>
+                    <td th:text="${userAccount.lastName}"></td>
+                    <td th:text="${userAccount.role}"></td>
+
+                    <div sec:authorize="hasAuthority('userAccount:write')">
+                        <td><a class="btn btn-primary" href="#" th:href="@{/user/{id}/edit(id=${userAccount.id})}">
+                            Edit </a></td>
+                        <td>
+                            <form th:method="POST" th:action="@{/user-delete/{id}(id=${userAccount.id})}">
+                                <input type="submit" class="btn btn-danger" value="Delete"/>
+                            </form>
+                        </td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${totalPages > 1}">
+            <div class="row col-sm-10">
+                <div class="col-sm-2">
+                    Number of accounts: [[${totalItems}]]
+                </div>
+                <div class="col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}"
+                           th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>
+					</span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form action="/logout" method="POST">
+                <button class="btn btn-warning" type="submit">Logout</button>
+            </form>
+            <div sec:authorize="hasAuthority('userAccount:write')">
+                <td><a class="btn btn-success" href="#" th:href="@{/user/new}"> Create user </a></td>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

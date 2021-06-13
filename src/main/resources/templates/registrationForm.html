@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New User Account</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h2>User Account Registration</h2>
+            <form th:action="@{/user/new}"
+                  th:object="${userAccount}" method="post">
+                <div class="form-row">
+                    <div class="col-md-6 form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" th:field="*{username}">
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('username')}"
+                             th:errors="*{username}"></div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" th:field="*{password}">
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}"></div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Firstname</label>
+                        <input type="text" class="form-control" th:field="*{firstName}">
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}"
+                             th:errors="*{firstName}"></div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Lastname</label>
+                        <input type="text" class="form-control" th:field="*{lastName}">
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}"
+                             th:errors="*{lastName}"></div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
