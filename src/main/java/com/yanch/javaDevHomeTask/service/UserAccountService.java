@@ -27,8 +27,7 @@ public class UserAccountService {
         this.userAccountRepository = userAccountRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
-
-    @Transactional
+   
     public void registerNewAccount(UserAccount userFromForm) throws UsernameAlreadyExistException {
         if (usernameExists(userFromForm.getUsername())) {
             throw new UsernameAlreadyExistException("Username " + userFromForm.getUsername() + " already exists");
@@ -54,7 +53,6 @@ public class UserAccountService {
     }
 
 
-    @Transactional
     public void updateUserForm(UserAccount userAccount) {
         userAccountRepository.updateUsername(
                 userAccount.getId(),
