@@ -1,5 +1,8 @@
-# JavaJuniorHomeTask
-Home task for Java Junior position
+## Home task for Java Junior position
+
+#### Simple CRUD application with registration
+
+
 How to start:
 - Check application.properties and .sql files
 - Run JavaDevHomeTaskApplication.java
