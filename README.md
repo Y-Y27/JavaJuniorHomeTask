@@ -1,6 +1,15 @@
 ## Home task for Java Junior position
 
-#### Simple CRUD application with registration
+ Simple CRUD application with registration
+=======
+# JavaJuniorHomeTask
+Home task for Java Junior position
+
+- Java 8
+- Spring (Spring Boot, Spring MVC, Spring Data, Spring Security)
+- PostgreSQL 
+- Thymeleaf
+- Maven
 
 
 How to start:
