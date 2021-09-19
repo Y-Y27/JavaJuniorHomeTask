@@ -4,7 +4,7 @@
 
 #### This is a WEB application that presents the interface of the user management system.
 
-##### The system supports the following role model:
+#### The system supports the following role model:
 
 
 | Role     | Available actions                  
@@ -22,7 +22,7 @@
 |          | Logout                                      
 |          |                                       
 
-##### The main entity in the system is *UserAccount*.
+#### The main entity in the system is *UserAccount*.
 | Field             | Description                  
 | --------          |---------------------------      
 | `Username`        | Latin characters only
